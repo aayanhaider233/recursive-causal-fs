@@ -98,7 +98,7 @@ def run_causal_pipeline():
             pickle.dump(graph, f)
 
     with open(CAUSAL_OUTPUT_DIR / "falsification_results.txt", "a") as f:
-        f.write("\n" + "=" * 80 + "\n")
+        f.write("\n" + "=" * 80 + "\n\n")
         print(falsification_results, file=f)
 
     dmr_edges.to_csv(

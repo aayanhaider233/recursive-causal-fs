@@ -1,0 +1,40 @@
+
+================================================================================
+
+=== FALSIFICATION SUMMARY ===
++-------------------------------------------------------------------------------------------------------+
+|                                         Falsification Summary                                         |
++-------------------------------------------------------------------------------------------------------+
+| The given DAG is informative because 0 / 1000 of the permutations lie in the Markov                   |
+| equivalence class of the given DAG (p-value: 0.00).                                                   |
+| The given DAG violates 12/23 LMCs and is better than 98.9% of the permuted DAGs (p-value: 0.01).      |
+| Based on the provided significance level (0.05) and because the DAG is informative,                   |
+| we do not reject the DAG.                                                                             |
++-------------------------------------------------------------------------------------------------------+
+|                                              Suggestions                                              |
++-------------------------------------------------------------------------------------------------------+
+| Causal Minimality | - Remove edge chr17_DMR_544 --> disease                                           |
++-------------------------------------------------------------------------------------------------------+
+
+Falsified:   False
+Falsifiable: True
+
+================================================================================
+
+=== FALSIFICATION SUMMARY ===
++-------------------------------------------------------------------------------------------------------+
+|                                         Falsification Summary                                         |
++-------------------------------------------------------------------------------------------------------+
+| The given DAG is informative because 0 / 1000 of the permutations lie in the Markov                   |
+| equivalence class of the given DAG (p-value: 0.00).                                                   |
+| The given DAG violates 13/25 LMCs and is better than 99.9% of the permuted DAGs (p-value: 0.00).      |
+| Based on the provided significance level (0.05) and because the DAG is informative,                   |
+| we do not reject the DAG.                                                                             |
++-------------------------------------------------------------------------------------------------------+
+|                                              Suggestions                                              |
++-------------------------------------------------------------------------------------------------------+
+| Causal Minimality |                                                                                   |
++-------------------------------------------------------------------------------------------------------+
+
+Falsified:   False
+Falsifiable: True
