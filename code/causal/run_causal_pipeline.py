@@ -4,9 +4,10 @@
 
 import me_level as mel
 import gene_level as genel
+import dmr_level as dmrl
 import pandas as pd
 from pathlib import Path
-from joblib import dump 
+import pickle
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -38,8 +39,7 @@ metadata = pd.read_csv(METADATA_PATH)
 dmr_gene_map = pd.read_csv(DMR_GENE_MAP_PATH)
 dmr_methylation_data = pd.read_csv(DMR_METHYLATION_DATA_PATH)
 
-
-def run_causal_feature_selection():
+def run_causal_pipeline():
 
     me_input_matrix = pd.merge(me_matrix, metadata, on='sample_id', how='inner').drop(columns=["sample_id"])
 
@@ -52,10 +52,8 @@ def run_causal_feature_selection():
         metadata=metadata, 
     )
 
-    dump(
-        me_graph, 
-        GRAPHS_DIR / "module_eigengenes_causal_graph_dag.joblib"
-    )
+    with open(GRAPHS_DIR / "module_eigengenes_causal_graph_dag.pkl", "wb") as f:
+        pickle.dump(me_graph, f)
 
     me_edges.to_csv(
         EDGE_LISTS_DIR / "module_eigengenes_causal_graph_edges.csv", 
@@ -76,10 +74,8 @@ def run_causal_feature_selection():
         metadata=metadata,
     )
 
-    dump(
-        gene_graph, 
-        GRAPHS_DIR / "genes_causal_graph_dag.joblib"
-    )
+    with open(GRAPHS_DIR / "genes_causal_graph_dag.pkl", "wb") as f:
+        pickle.dump(gene_graph, f)
 
     gene_edges.to_csv(
         EDGE_LISTS_DIR / "genes_causal_graph_edges.csv", 
@@ -91,11 +87,24 @@ def run_causal_feature_selection():
         index=False
     )
 
-    return dmr_matrix
-
-def run_causal_validation(dmr_matrix):
     dmr_input_matrix = pd.merge(dmr_matrix, metadata, on='sample_id', how='inner').drop(columns=["sample_id"])
+    graph, falsification_results, modified_graph, dmr_edges = dmrl.run_dmr_level_stage(dmr_matrix=dmr_input_matrix)
 
+    if modified_graph:
+        with open(GRAPHS_DIR / "dmrs_causal_graph_dag.pkl", "wb") as f:
+            pickle.dump(modified_graph, f)
+    else:
+        with open(GRAPHS_DIR / "dmrs_causal_graph_dag.pkl", "wb") as f:
+            pickle.dump(graph, f)
+
+    with open(CAUSAL_OUTPUT_DIR / "falsification_results.txt", "a") as f:
+        f.write("\n" + "=" * 80 + "\n")
+        print(falsification_results, file=f)
+
+    dmr_edges.to_csv(
+        EDGE_LISTS_DIR / "dmrs_causal_graph_edges.csv", 
+        index=False
+    )
 
 if __name__ == "__main__":
-    run_causal_feature_selection()
+    run_causal_pipeline()

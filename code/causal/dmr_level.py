@@ -96,9 +96,9 @@ def run_dmr_level_stage(dmr_matrix):
         graph=graph,
         falsification_results=results
     )
-    final_dmr_df = ace_estimation_refutation(
+    edge_df = ace_estimation_refutation(
         graph=modified_graph,
         dmr_matrix=dmr_matrix
     )
 
-    return graph, results, modified_graph, final_dmr_df
+    return graph, results, modified_graph, edge_df
