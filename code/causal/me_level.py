@@ -1,8 +1,6 @@
 import discovery_utils as disc
 import me_gene_intermediate as mgi
 
-from joblib import dump
-
 EXOGENOUS_VARS = ["age", "sex"]
 SINK_VARS = ["disease"]
 N_BOOTSTRAPS = 200
