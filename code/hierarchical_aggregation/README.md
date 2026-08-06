@@ -80,6 +80,7 @@ python main.py
 |03|dmr\_to\_gene\_mapping.py|Construct DMR-gene map|
 |04|gene\_aggregation.py|Construct aggregated gene methylation matrix from DMR methylation matrix|
 |05|wgcna.R|Perform WGCNA to obtain ME matrix, gene-module assignments, and gene-module membership matrix|
+|06|run\_aggregation.py|Stage driver for the complete hierarchical aggregation workflow|
 
 
 

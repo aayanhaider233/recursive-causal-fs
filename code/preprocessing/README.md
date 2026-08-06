@@ -80,7 +80,7 @@ python main.py
 |07|batch\_effect\_correction.py|Batch effect correction|
 |08|partition\_data.py|Stratified train-test split|
 |09|epigenetic\_age\_acceleration.py|Compute epigenetic age acceleration (EAA)|
-|10|run\_preprocessing.py|Execute the complete preprocessing workflow|
+|10|run\_preprocessing.py|Stage driver for the complete preprocessing workflow|
 
 
 

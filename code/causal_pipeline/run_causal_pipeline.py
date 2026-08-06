@@ -26,7 +26,7 @@ METADATA_PATH = METADATA_DIR / "train_metadata.csv"
 DMR_METHYLATION_DATA_PATH = DMR_METHYLATION_DIR / "train_dmr_matrix.csv"
 
 RESULTS_DIR = ROOT / "results"
-CAUSAL_OUTPUT_DIR = RESULTS_DIR / "causal_discovery"
+CAUSAL_OUTPUT_DIR = RESULTS_DIR / "causal_pipeline"
 EDGE_LISTS_DIR = CAUSAL_OUTPUT_DIR / "edge_lists"
 GRAPHS_DIR = CAUSAL_OUTPUT_DIR / "graphs"
 
