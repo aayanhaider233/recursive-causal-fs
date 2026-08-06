@@ -14,10 +14,10 @@ Four schizophrenia methylation cohorts sourced from NCBI Gene Expression Omnibus
 
 |**Cohort**|**Methylation file**|**Metadata file**|
 |-|-|-|
-|GSE80417|GSE80417\_normalizedBetas.csv.gz|GSE80417\_series\_matrix.txt.gz|
-|GSE84727|GSE84727\_normalisedBetas.csv.gz|GSE84727\_series\_matrix.txt.gz|
-|GSE147221|GSE147221\_Dublin\_blood\_processed\_signals.csv.gz|GSE147221\_series\_matrix.txt.gz|
-|GSE152027|GSE152027\_IOP\_processed\_signals.csv.gz|GSE152027\_series\_matrix.txt.gz|
+|GSE80417|`GSE80417_normalizedBetas.csv.gz`|`GSE80417_series_matrix.txt.gz`|
+|GSE84727|`GSE84727_normalisedBetas.csv.gz`|`GSE84727_series_matrix.txt.gz`|
+|GSE147221|`GSE147221_Dublin_blood_processed_signals.csv.gz`|`GSE147221_series_matrix.txt.gz`|
+|GSE152027|`GSE152027_IOP_processed_signals.csv.gz`|`GSE152027_series_matrix.txt.gz`|
 
 
 

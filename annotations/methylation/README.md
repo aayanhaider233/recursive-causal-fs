@@ -8,9 +8,9 @@ The following files are required for filtering Illumina HumanMethylation450 prob
 
 |**Required file**|**Purpose**|
 |-|-|
-|humanmethylation450\_15017482\_v1-2.csv|Illumina HumanMethylation450 manifest|
-|48639-non-specific-probes-Illumina450k.csv|Cross-reactive probe list|
-|HumanMethylation450\_15017482\_v.1.1\_hg19\_bowtie\_multimap.csv|Multi-mapping probe list|
+|`humanmethylation450_15017482_v1-2.csv`|Illumina HumanMethylation450 manifest|
+|`48639-non-specific-probes-Illumina450k.csv`|Cross-reactive probe list|
+|`HumanMethylation450_15017482_v.1.1_hg19_bowtie_multimap.txt`|Multi-mapping probe list|
 
 
 
@@ -32,5 +32,5 @@ The following files are required for filtering Illumina HumanMethylation450 prob
 
 
 
-* Place the downloaded files in annotations/methylation/
+* Place the downloaded files in `annotations/methylation/`
 

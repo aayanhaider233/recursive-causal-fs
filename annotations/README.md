@@ -8,12 +8,10 @@ This directory contains external reference annotations required to reproduce the
 
 |**Subdirectory**|**Contents**|
 |-|-|
-|methylation/|Illumina HumanMethylation450 manifest and probe filtering resources|
-|gene\_ontology/|Gene Ontology ontology file used for enrichment analysis|
+|`methylation/`|Illumina HumanMethylation450 manifest and probe filtering resources|
+|`gene_ontology/`|Gene Ontology ontology file used for enrichment analysis|
 
 
-
-&#x09;
 
 #### Note
 

@@ -12,9 +12,9 @@ This stage performs data harmonisation, quality control, epigenetic age estimati
 
 
 
-* Raw metadata files (\*\_series\_matrix.txt.gz)
-* Raw methylation matrices (\*.csv.gz)
-* Illumina annotation files in annotations/methylation/
+* `data/raw/*_series_matrix.txt.gz`
+* `data/raw/*.csv.gz`
+* `annotations/methylation/`
 
 
 
@@ -24,12 +24,12 @@ This stage performs data harmonisation, quality control, epigenetic age estimati
 
 
 
-* data/intermediate/batch\_info.csv 
-* data/methylation/cpg\_mval\_matrix\_full\_corrected.csv 
-* data/methylation/train\_cpg\_mval\_corrected.csv
-* data/methylation/test\_cpg\_mval\_corrected.csv
-* data/metadata/train\_metadata.csv
-* data/metadata/test\_metadata.csv`
+* `data/intermediate/batch_info.csv`
+* `data/methylation/cpg_mval_matrix_full_corrected.csv` 
+* `data/methylation/train_cpg_mval_corrected.csv`
+* `data/methylation/test_cpg_mval_corrected.csv`
+* `data/metadata/train_metadata.csv`
+* `data/metadata/test_metadata.csv`
 
 
 
@@ -71,16 +71,16 @@ python main.py
 
 |**Order**|**Module**|**Description**|
 |-|-|-|
-|01|metadata\_harmonisation.py|Parse and harmonise GEO metadata|
-|02|probe\_quality\_control.py|Initial probe filter, QC and, detection p-value filtering|
-|03|epigenetic\_age.py|Generate epigenetic age estimates (Horvath, Hannum, and GrimAge)|
-|04|probe\_filter.py|Remove sex-chromosome, cross-reactive, and multi-mapping probes|
-|05|concatenate\_datasets.py|Merge cohorts and generate batch information|
-|06|methylation\_beta\_to\_M.py|Convert methylation beta-values to M-values|
-|07|batch\_effect\_correction.py|Batch effect correction|
-|08|partition\_data.py|Stratified train-test split|
-|09|epigenetic\_age\_acceleration.py|Compute epigenetic age acceleration (EAA)|
-|10|run\_preprocessing.py|Stage driver for the complete preprocessing workflow|
+|01|`metadata_harmonisation.py`|Parse and harmonise GEO metadata|
+|02|`probe_quality_control.py`|Initial probe filter, QC and, detection p-value filtering|
+|03|`epigenetic_age.py`|Generate epigenetic age estimates (Horvath, Hannum, and GrimAge)|
+|04|`probe_filter.py`|Remove sex-chromosome, cross-reactive, and multi-mapping probes|
+|05|`concatenate_datasets.py`|Merge cohorts and generate batch information|
+|06|`methylation_beta_to_M.py`|Convert methylation beta-values to M-values|
+|07|`batch_effect_correction.py`|Batch effect correction|
+|08|`partition_data.py`|Stratified train-test split|
+|09|`epigenetic_age_acceleration.py`|Compute epigenetic age acceleration (EAA)|
+|10|`run_preprocessing.py`|Stage driver for the complete preprocessing workflow|
 
 
 

@@ -12,9 +12,9 @@ This stage performs DMR detection, CpG-to-DMR aggregation, DMR-to-gene mapping, 
 
 
 
-* Batch corrected, M-scale CpG methylation matrix (\*\_cpg_mval\_matrix\_corrected.csv)
-* Training metadata set (train\_metadata.csv)
-* Illumina 450K array manifest
+* `data/methylation/*_cpg_mval_matrix_corrected.csv`
+* `data/metadata/train_metadata.csv`
+* `annotations/methylation/humanmethylation450_15017482_v1-2.csv`
 
 
 
@@ -24,16 +24,16 @@ This stage performs DMR detection, CpG-to-DMR aggregation, DMR-to-gene mapping, 
 
 
 
-* data/intermediate/dmr\_groups.rds
-* data/intermediate/dmr\_cpg\_map.csv
-* data/intermediate/dmr\_gene\_map.csv
-* data/intermediate/gene\_methylation\_matrix.csv
-* data/intermediate/gene\_module\_assignments.csv
-* data/intermediate/gene\_module\_kme\_matrix.csv
-* data/methylation/train\_dmr\_matrix.csv 
-* data/methylation/test\_dmr\_matrix.csv
-* data/methylation/test\_cpg\_mval\_corrected.csv
-* data/causal\_methylation\_inputs/me\_matrix.csv
+* `data/intermediate/dmr_groups.rds`
+* `data/intermediate/dmr_cpg_map.csv`
+* `data/intermediate/dmr_gene_map.csv`
+* `data/intermediate/gene_methylation_matrix.csv`
+* `data/intermediate/gene_module_assignments.csv`
+* `data/intermediate/gene_module_kme_matrix.csv`
+* `data/methylation/train_dmr_matrix.csv` 
+* `data/methylation/test_dmr_matrix.csv`
+* `data/methylation/test_cpg_mval_corrected.csv`
+* `data/causal_methylation_inputs/me_matrix.csv`
 
 
 
@@ -75,12 +75,12 @@ python main.py
 
 |**Order**|**Module**|**Description**|
 |-|-|-|
-|01|dmr\_detection.R|Detect DMRs from CpG methylation and disease status data|
-|02|dmr\_aggregation.R|Construct aggregated DMR methylation matrix from CpG methylation matrix|
-|03|dmr\_to\_gene\_mapping.py|Construct DMR-gene map|
-|04|gene\_aggregation.py|Construct aggregated gene methylation matrix from DMR methylation matrix|
-|05|wgcna.R|Perform WGCNA to obtain ME matrix, gene-module assignments, and gene-module membership matrix|
-|06|run\_aggregation.py|Stage driver for the complete hierarchical aggregation workflow|
+|01|`dmr_detection.R`|Detect DMRs from CpG methylation and disease status data|
+|02|`dmr_aggregation.R`|Construct aggregated DMR methylation matrix from CpG methylation matrix|
+|03|`dmr_to_gene_mapping.py`|Construct DMR-gene map|
+|04|`gene_aggregation.py`|Construct aggregated gene methylation matrix from DMR methylation matrix|
+|05|`wgcna.R`|Perform WGCNA to obtain ME matrix, gene-module assignments, and gene-module membership matrix|
+|06|`run_aggregation.py`|Stage driver for the complete hierarchical aggregation workflow|
 
 
 

@@ -12,8 +12,8 @@ This directory contains a self-contained interactive visualization of the inferr
 
 
 
-* **index.html:** visualization interface. Open in a web browser to explore the ME-, gene-, and DMR-level graphs interactively. Each DAG is provided in a separate tab accessible through the interface.
-* **graph\_data.js:** edge list encoded as source-target node pairs
+* `index.html`: visualization interface. Open in a web browser to explore the ME-, gene-, and DMR-level graphs interactively. Each DAG is provided in a separate tab accessible through the interface.
+* `graph_data.js`: edge list encoded as source-target node pairs
 
 
 
