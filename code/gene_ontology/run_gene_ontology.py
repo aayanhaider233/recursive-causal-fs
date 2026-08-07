@@ -6,7 +6,7 @@ from goatools.obo_parser import GODag
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent.parent 
+ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "data"
 INTERMEDIATE_DIR = DATA_DIR / "intermediate"
 ANNOTATIONS_DIR = ROOT / "annotations" / "gene_ontology"

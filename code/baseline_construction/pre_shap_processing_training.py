@@ -46,9 +46,17 @@ CV = StratifiedKFold(
     random_state=42
 )
 
-def select_top_n_dmrs_by_variance(train_dmr_matrix):
+def select_top_n_dmrs_by_variance(train_set):
 
-    dmr_vars = train_dmr_matrix.drop("sample_id", axis=1).var(axis=0)
+    features = train_set.columns.tolist()
+
+    dmr_features = [
+        f for f in features 
+        if "DMR" in f
+    ]
+
+    dmr_vars = train_set[dmr_features].var(axis=0)
+
     selected_dmrs = dmr_vars.sort_values(ascending=False).head(N_TOP).index.tolist()
 
     return selected_dmrs
@@ -60,7 +68,7 @@ def subset_datasets(train_set, selected_dmrs):
         if "DMR" not in c
     ]
 
-    return train_set[selected_dmrs + metadata]
+    return train_set[metadata + selected_dmrs]
 
 def train_model(config, train_set):
     X_train = train_set.drop(columns=["sample_id", "disease"])

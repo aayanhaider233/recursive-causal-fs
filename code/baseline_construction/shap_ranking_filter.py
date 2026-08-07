@@ -45,5 +45,5 @@ def subset_train_test_sets(top_features, train_set, test_set):
 
     final_train_set = train_set[final_features]
     final_test_set = test_set[final_features]
-
+    
     return final_train_set, final_test_set

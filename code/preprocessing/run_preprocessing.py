@@ -19,7 +19,7 @@ from pathlib import Path
 # Dataset directories
 # --------------------------------------------------
 
-ROOT = Path(__file__).resolve().parent.parent 
+ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
 ANNOTATIONS = ROOT / "annotations" / "methylation"
 RAW = DATA / "raw"

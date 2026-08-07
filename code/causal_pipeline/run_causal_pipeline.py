@@ -9,7 +9,7 @@ import pandas as pd
 from pathlib import Path
 import pickle
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
 CAUSAL_METHYLATION_INPUT_DIR = DATA / "causal_methylation_inputs"
 INTERMEDIATE_DATA_DIR = DATA / "intermediate"

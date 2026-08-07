@@ -24,26 +24,15 @@ def construct_correlation_network(train_dmr_matrix):
 def prune_components(train_dmr_matrix, test_dmr_matrix):
     dmr_vars = train_dmr_matrix.drop("sample_id", axis=1).var(axis=0)
     dmrs_to_keep = []
-    cluster_list = [] 
 
     components = construct_correlation_network(train_dmr_matrix=train_dmr_matrix)
 
-    for idx, component in enumerate(components, start=1):
+    for _, component in enumerate(components, start=1):
         component_vars = dmr_vars[list(component)]
         rep = component_vars.idxmax()
         dmrs_to_keep.append(rep)
 
-        cluster_info = {
-            "cluster_id": idx,
-            "representative_DMR": rep,
-            "cluster_size": len(component),
-            "cluster_members": ";".join(component)
-        }
-        cluster_list.append(cluster_info)
-
-    cluster_info = pd.DataFrame(cluster_list)
-
     train_dmr_matrix_pruned = train_dmr_matrix[["sample_id"] + dmrs_to_keep]
     test_dmr_matrix_pruned = test_dmr_matrix[["sample_id"] + dmrs_to_keep]
 
-    return train_dmr_matrix_pruned, test_dmr_matrix_pruned, cluster_info
+    return train_dmr_matrix_pruned, test_dmr_matrix_pruned

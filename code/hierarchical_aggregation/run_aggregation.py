@@ -12,7 +12,7 @@ import gene_aggregation as ga
 # Dataset directories
 # --------------------------------------------------
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
 
 METHYLATION_PATH = DATA / "methylation"

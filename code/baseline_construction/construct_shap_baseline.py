@@ -7,13 +7,10 @@ import pandas as pd
 MODEL_CONFIGS = preshap.MODEL_CONFIGS
 SHAP_CONFIGS = sc.SHAP_CONFIGS
 
-def construct_shap_baseline(train_dmr_matrix, test_dmr_matrix, train_metadata, test_metadata):
-
-    train_set = pd.merge(train_dmr_matrix, train_metadata, on="sample_id", how="inner").drop("sample_id", axis=1)
-    test_set = pd.merge(test_dmr_matrix, test_metadata, on="sample_id", how="inner").drop("sample_id", axis=1)
+def construct_shap_baseline(train_set, test_set):
 
     selected_dmrs = preshap.select_top_n_dmrs_by_variance(
-        train_dmr_matrix=train_dmr_matrix
+        train_set=train_set
     )
 
     shap_train_set = preshap.subset_datasets(
@@ -71,6 +68,8 @@ def construct_shap_baseline(train_dmr_matrix, test_dmr_matrix, train_metadata, t
     )
 
     return (
+        shap_train_set, 
+        shap_test_set,
         lr_final_train, 
         lr_final_test,
         rf_final_train,
