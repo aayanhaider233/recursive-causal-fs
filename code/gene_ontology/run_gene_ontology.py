@@ -36,3 +36,6 @@ def run_gene_ontology():
         INTERMEDIATE_DIR / "gene_GO_term_map_filtered.csv",
         index=False
     )
+
+if __name__ == "__main__":
+    run_gene_ontology()
