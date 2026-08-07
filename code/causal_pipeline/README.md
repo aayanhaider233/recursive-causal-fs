@@ -114,5 +114,5 @@ python main.py
 * Module eigengene construction, DMR identification, WGCNA, GO enrichment, and metadata preprocessing are performed in earlier stages of the project and are not part of this pipeline.
 * The DMR-level DAG falsification stage produces a causal minimality report. Any suggested graph modifications must be reviewed and implemented manually by the user through the placeholder DAG modification function before the final DMR-level ACE estimation and refutation analyses are performed.
 * Refutation analyses are configurable through the `REFUTATION_METHODS` setting in `discovery_utils.py`. By default, the pipeline supports bootstrap, placebo, and random common cause refuters.
-* Prior knowledge constraints (exogenous variables, sink variables, forbidden edges, number of bootstraps, and other thresholds) are defined near the top of each stage driver and can be modified without changing the underlying discovery utilities.
+* Prior knowledge constraints (exogenous variables, sink variables, forbidden edges), number of bootstraps, and other thresholds are defined near the top of each stage driver and can be modified without changing the underlying discovery utilities.
 * Graphs are stored as NetworkX `DiGraph` pickle (`.pkl`) files and edge lists are exported as CSV files for downstream analysis.
