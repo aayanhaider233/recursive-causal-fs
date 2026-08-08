@@ -68,6 +68,7 @@ python main.py
 |-|-|-|
 |01|`enrichment_analysis.py`|Performs GO enrichment analysis and maps term IDs to readable term names|
 |02|`keyword_filter.py`|Filters the gene-GO term map using specified keywords relevant to the study|
+|02|`run_gene_ontology.py`|Stage driver for the entire GO workflow|
 
 
 
