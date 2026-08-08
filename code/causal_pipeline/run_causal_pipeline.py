@@ -41,7 +41,7 @@ dmr_methylation_data = pd.read_csv(DMR_METHYLATION_DATA_PATH)
 
 def run_causal_pipeline():
 
-    me_input_matrix = pd.merge(me_matrix, metadata, on='sample_id', how='inner').drop(columns=["sample_id"])
+    me_input_matrix = pd.merge(me_matrix, metadata, on='sample_id', how='inner')
 
     me_graph, me_edges, gene_matrix = mel.run_me_level_stage(
         me_matrix=me_input_matrix,
@@ -65,10 +65,8 @@ def run_causal_pipeline():
         index=False
     )
 
-    gene_input_matrix = pd.merge(gene_matrix, metadata, on='sample_id', how='inner').drop(columns=["sample_id"])
-    
     gene_graph, gene_edges, dmr_matrix = genel.run_gene_level_stage(
-        gene_matrix=gene_input_matrix,
+        gene_matrix=gene_matrix,
         dmr_gene_map=dmr_gene_map,
         dmr_methylation_data=dmr_methylation_data,
         metadata=metadata,
@@ -87,8 +85,7 @@ def run_causal_pipeline():
         index=False
     )
 
-    dmr_input_matrix = pd.merge(dmr_matrix, metadata, on='sample_id', how='inner').drop(columns=["sample_id"])
-    graph, falsification_results, modified_graph, dmr_edges = dmrl.run_dmr_level_stage(dmr_matrix=dmr_input_matrix)
+    graph, falsification_results, modified_graph, dmr_edges = dmrl.run_dmr_level_stage(dmr_matrix=dmr_matrix)
 
     if modified_graph:
         with open(GRAPHS_DIR / "dmrs_causal_graph_dag.pkl", "wb") as f:

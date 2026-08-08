@@ -1,8 +1,7 @@
 import pandas as pd
 
-
 def extract_parent_genes(edges, traits, target="disease"):
-    trait_columns = traits.columns.tolist()
+    trait_columns = traits.drop("sample_id", axis=1).columns.tolist()
     genes = (
         edges.loc[edges["target"] == target, "source"]
         .loc[lambda s: ~s.isin(trait_columns)]
@@ -27,11 +26,14 @@ def reverse_map_genes_to_dmrs(parent_genes, dmr_gene_map):
 
 def subset_dmr_dataset(
     dmr_methylation_data,
-    dmr_map
+    dmr_map,
+    traits
 ):
 
     dmrs = dmr_map["DMR"].unique().tolist()
 
-    final_dmr_df = dmr_methylation_data[dmrs].copy()
+    filtered_dmr_df = dmr_methylation_data[["sample_id"] + dmrs].copy()
+
+    final_dmr_df = pd.merge(traits, filtered_dmr_df, on="sample_id", how="inner")
 
     return final_dmr_df

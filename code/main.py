@@ -3,6 +3,7 @@ from hierarchical_aggregation.run_aggregation import run_aggregation
 from gene_ontology.run_gene_ontology import run_gene_ontology
 from causal_pipeline.run_causal_pipeline import run_causal_pipeline
 from baseline_construction.run_baseline_construction import run_baseline_construction
+from causal_feature_set_construction.run_causal_feature_set_construction import run_causal_feature_set_construction
 
 def main():
     print("=== Starting full pipeline ===")
@@ -12,6 +13,7 @@ def main():
     run_gene_ontology()
     run_causal_pipeline()
     run_baseline_construction()
+    run_causal_feature_set_construction()
 
     print("=== Pipeline complete ===")
 

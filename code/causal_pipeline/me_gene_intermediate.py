@@ -93,10 +93,7 @@ def prune_genes_by_correlation(gene_methylation_data, top_genes, quantile):
 
     genes_to_keep = top_genes["Gene"].unique()
 
-    gene_df = gene_methylation_data.loc[
-        :,
-        gene_methylation_data.columns.intersection(genes_to_keep)
-    ]
+    gene_df = gene_methylation_data.loc[:, gene_methylation_data.columns.intersection(genes_to_keep)]
 
     corr_matrix = gene_df.corr(method="pearson")
     corr_abs = corr_matrix.abs()
@@ -154,15 +151,13 @@ def prune_genes_by_correlation(gene_methylation_data, top_genes, quantile):
 
 def subset_data_by_gene(data, traits, genes):
 
-    genes_to_keep = genes['Gene'].unique()
+    genes_to_keep = genes['Gene'].unique().tolist()
 
-    filtered_gene_data = data.loc[
-        :, data.columns.intersection(genes_to_keep)
-    ]
+    filtered_gene_data = data[["sample_id"] + genes_to_keep]
 
     assert len(filtered_gene_data) == len(traits), "Sample mismatch"
 
-    final_df = pd.concat([traits, filtered_gene_data], axis=1)
+    final_df = pd.merge(traits, filtered_gene_data, on="sample_id", how="inner")
 
     return final_df
 

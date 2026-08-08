@@ -57,12 +57,18 @@ def bootstrap_discovery(
     forbidden_edges=None,
     seed=42
 ):
+
+    if "sample_id" in data.columns.tolist():
+        input_matrix = data.drop("sample_id", axis=1)
+    else: 
+        input_matrix = data
+    
     exogenous_vars = exogenous_vars or []
     sink_vars = sink_vars or []
     forbidden_edges = forbidden_edges or []
 
-    data_scaled = StandardScaler().fit_transform(data.values)
-    variables = data.columns.tolist()
+    input_scaled = StandardScaler().fit_transform(input_matrix.values)
+    variables = input_matrix.columns.tolist()
     n = len(variables)
 
     edge_counts = np.zeros((n, n))
@@ -77,14 +83,14 @@ def bootstrap_discovery(
             forbidden_edges=forbidden_edges
         )
 
-        data_resampled = resample(
-            data_scaled, 
+        input_resampled = resample(
+            input_scaled, 
             random_state=seed + b
         )
 
         model = DirectLiNGAM(prior_knowledge=prior_matrix)
 
-        model.fit(data_resampled)
+        model.fit(input_resampled)
 
         B = model.adjacency_matrix_
 
