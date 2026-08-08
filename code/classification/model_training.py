@@ -4,8 +4,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 
-N_TOP = 2000
-
 MODEL_CONFIGS = {
     "logistic_regression": {
         "estimator": Pipeline([
@@ -44,30 +42,6 @@ CV = StratifiedKFold(
     shuffle=True,
     random_state=42
 )
-
-def select_top_n_dmrs_by_variance(train_set):
-
-    features = train_set.columns.tolist()
-
-    dmr_features = [
-        f for f in features 
-        if "DMR" in f
-    ]
-
-    dmr_vars = train_set[dmr_features].var(axis=0)
-
-    selected_dmrs = dmr_vars.sort_values(ascending=False).head(N_TOP).index.tolist()
-
-    return selected_dmrs
-
-def subset_datasets(train_set, selected_dmrs):
-
-    metadata = [
-        c for c in train_set.columns
-        if "DMR" not in c
-    ]
-
-    return train_set[metadata + selected_dmrs]
 
 def train_model(config, train_set):
     X_train = train_set.drop(columns=["sample_id", "disease"])
