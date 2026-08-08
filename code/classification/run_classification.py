@@ -2,6 +2,7 @@ import model_training as mtrain
 import model_testing as mtest
 
 import pandas as pd
+from joblib import dump
 from pathlib import Path
 
 
@@ -74,6 +75,17 @@ def run_classification():
                 train_set=train_set,
             )
 
+            result_dataset_id = (
+                "s1"
+                if dataset_id in ["s1_lr", "s1_rf"]
+                else dataset_id
+            )
+
+            dump(
+                model, 
+                MODEL_OUTPUT_PATH / f"{result_dataset_id}_{model_name}.joblib"
+            )
+
             fitted_models[dataset_id][model_name] = model
 
             metrics = mtest.evaluate_model(
@@ -82,7 +94,7 @@ def run_classification():
             )
 
             results.append({
-                "dataset": dataset_id,
+                "dataset": result_dataset_id,
                 "model": model_name,
                 "accuracy": metrics["accuracy"],
                 "precision": metrics["precision"],
@@ -94,4 +106,10 @@ def run_classification():
 
     results_df = pd.DataFrame(results)
 
-    return fitted_models, results_df
+    results_df.to_csv(
+        METRIC_OUTPUT_PATH / "test_performances.csv",
+        index=False
+    )
+
+if __name__ == "__main__":
+    run_classification()

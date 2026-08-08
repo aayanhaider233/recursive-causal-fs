@@ -63,23 +63,27 @@ METRICS = {
 
 def compute_metric(model, test_set, metric):
 
-    X_test = test_set.drop(
-        columns=["sample_id", OUTCOME]
-    )
-
-    y_test = test_set[OUTCOME]
-
     config = METRICS[metric]
+
+    model_features = model.feature_names_in_
+
+    missing_features = set(model_features) - set(test_set.columns)
+
+    if missing_features:
+        raise ValueError(
+            f"Test set is missing features required by the model: "
+            f"{missing_features}"
+        )
+
+    X_test = test_set.loc[:, model_features]
+    y_test = test_set[OUTCOME]
 
     if config["prob"]:
         predictions = model.predict_proba(X_test)[:, 1]
     else:
         predictions = model.predict(X_test)
 
-    return config["func"](
-        y_test,
-        predictions,
-    )
+    return config["func"](y_test, predictions)
 
 
 def evaluate_model(model, test_set):
