@@ -24,8 +24,7 @@ MODEL_CONFIGS = {
     "random_forest": {
         "estimator": RandomForestClassifier(
             class_weight="balanced",
-            random_state=42,
-            n_jobs=-1,
+            random_state=42
         ),
         "param_grid": {
             "n_estimators": [300, 400, 500],
