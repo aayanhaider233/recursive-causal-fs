@@ -192,7 +192,7 @@ def run_preprocessing():
     # 8. Train-test split
     # --------------------------------------------------
 
-    train_methylation, test_methylation, train_metadata, test_metadata, train_batch, test_batch = partition.partition_data(
+    train_methylation, test_methylation, train_metadata, test_metadata, _, _ = partition.partition_data(
         methylation_df=methylation_mval_matrix_corrected, 
         metadata_df=metadata_full, 
         batch_info=batch_info

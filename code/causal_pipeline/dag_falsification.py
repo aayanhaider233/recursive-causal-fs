@@ -1,5 +1,4 @@
 import networkx as nx
-import pandas as pd
 
 from dowhy.gcm.falsify import (
     FalsifyConst,

@@ -1,5 +1,3 @@
-import pandas as pd
-
 def extract_parent_genes(edges, traits, target="disease"):
     trait_columns = traits.drop("sample_id", axis=1).columns.tolist()
     genes = (
