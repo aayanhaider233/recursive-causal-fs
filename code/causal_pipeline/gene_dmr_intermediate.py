@@ -26,14 +26,11 @@ def reverse_map_genes_to_dmrs(parent_genes, dmr_gene_map):
 
 def subset_dmr_dataset(
     dmr_methylation_data,
-    dmr_map,
-    traits
+    dmr_map
 ):
 
     dmrs = dmr_map["DMR"].unique().tolist()
 
     filtered_dmr_df = dmr_methylation_data[["sample_id"] + dmrs].copy()
 
-    final_dmr_df = pd.merge(traits, filtered_dmr_df, on="sample_id", how="inner")
-
-    return final_dmr_df
+    return filtered_dmr_df

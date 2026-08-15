@@ -49,7 +49,7 @@ def run_causal_pipeline():
         gene_go_map=gene_go_map, 
         gene_module_membership=gene_module_membership, 
         gene_methylation_data=gene_methylation_data, 
-        metadata=metadata, 
+        metadata=metadata 
     )
 
     with open(GRAPHS_DIR / "module_eigengenes_causal_graph_dag.pkl", "wb") as f:
@@ -65,8 +65,10 @@ def run_causal_pipeline():
         index=False
     )
 
+    gene_input_matrix = pd.merge(gene_matrix, metadata, on='sample_id', how='inner')
+
     gene_graph, gene_edges, dmr_matrix = genel.run_gene_level_stage(
-        gene_matrix=gene_matrix,
+        gene_matrix=gene_input_matrix,
         dmr_gene_map=dmr_gene_map,
         dmr_methylation_data=dmr_methylation_data,
         metadata=metadata,
@@ -85,7 +87,9 @@ def run_causal_pipeline():
         index=False
     )
 
-    graph, falsification_results, modified_graph, dmr_edges = dmrl.run_dmr_level_stage(dmr_matrix=dmr_matrix)
+    dmr_input_matrix = pd.merge(dmr_matrix, metadata, on='sample_id', how='inner')
+
+    graph, falsification_results, modified_graph, dmr_edges = dmrl.run_dmr_level_stage(dmr_matrix=dmr_input_matrix)
 
     if modified_graph:
         with open(GRAPHS_DIR / "dmrs_causal_graph_dag.pkl", "wb") as f:

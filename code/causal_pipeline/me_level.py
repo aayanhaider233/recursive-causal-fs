@@ -89,7 +89,6 @@ def me_level_post_processing(
 
     final_gene_df = mgi.subset_data_by_gene(
         gene_methylation_data=gene_methylation_data,
-        traits=metadata,
         genes=pruned_genes
     )
 

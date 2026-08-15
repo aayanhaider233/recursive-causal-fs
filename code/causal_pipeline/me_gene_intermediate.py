@@ -149,16 +149,12 @@ def prune_genes_by_correlation(gene_methylation_data, top_genes, quantile):
 
     return retained_gene_df
 
-def subset_data_by_gene(data, traits, genes):
+def subset_data_by_gene(data, genes):
 
     genes_to_keep = genes['Gene'].unique().tolist()
 
     filtered_gene_data = data[["sample_id"] + genes_to_keep]
 
-    assert len(filtered_gene_data) == len(traits), "Sample mismatch"
-
-    final_df = pd.merge(traits, filtered_gene_data, on="sample_id", how="inner")
-
-    return final_df
+    return filtered_gene_data
 
     
