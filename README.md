@@ -12,7 +12,8 @@ The project implements a hierarchical analytical framework integrating DNA methy
 .
 ├── annotations/
 │   ├── gene_ontology/
-│   └── methylation/
+│   ├── methylation/
+│   └── README.md
 │
 ├── code/
 │   ├── baseline_construction/
@@ -23,7 +24,8 @@ The project implements a hierarchical analytical framework integrating DNA methy
 │   ├── hierarchical_aggregation/
 │   ├── ml_performance_comparison/
 │   ├── preprocessing/
-│   └── main.py
+│   ├── main.py
+│   └── README.md
 │
 ├── data/
 │   ├── causal_methylation_inputs/
@@ -40,6 +42,7 @@ The project implements a hierarchical analytical framework integrating DNA methy
 │   └── classification_performance/
 │
 ├──visualiser/
+│   └── README.md
 │
 ├── requirements.txt
 └── README.md
@@ -55,16 +58,13 @@ Contains the Python and R source codes implementing the analytical workflow.
 
 Each major analytical stage contains its own driver and supporting modules. Detailed documentation for individual stages is provided in the corresponding directories.
 
-<!-- The figure-generation scripts are maintained separately from the main analytical pipeline because they generate publication figures from previously generated results rather than producing inputs required by subsequent analytical stages. -->
-
-
 ### `data/`
 
 Contains the input and derived datasets used throughout the analysis.
 
 ### `figures/`
 
-Contains publication-ready figures generated from the analysis results.
+Contains publication-ready figures used in the study.
 
 ### `results/`
 
@@ -180,6 +180,108 @@ The resulting DMR matrix forms the basis for subsequent feature-selection and cl
 
 ---
 
+# DMR-to-Gene Mapping
+
+DMRs are first mapped to genes using the 450K array manifest CpG probe annotations and subsequently through predefined transcription start site (TSS) region.
+
+The mapping region used in the analysis is:
+
+```text
+TSS -2000 bp to +500 bp
+```
+
+Any remaining DMRs are mapped to genes on the basis of proximity.
+
+The resulting DMR-to-gene relationships are used for subsequent gene-level and module-level analyses.
+
+---
+
+# Gene Ontology
+
+Gene Ontology (GO) enrichment analysis is used to map the genes obtained to biological process terms. This set of terms is filtered using specific keywords with respect to their relevance to this study.
+
+This acts as a intermediate refinement stage between the ME- and gene-level causal discoveries as well as a method to utilise domain knowledge as a feature selection criterion.
+
+---
+
+# WGCNA
+
+Weighted Gene Co-expression Network Analysis (WGCNA) is used to identify groups of co-expressed genes.
+
+The network construction uses a soft-thresholding power selected using the scale-free topology criterion.
+
+The analysis uses:
+
+```text
+Scale-free topology R² ≥ 0.9
+```
+
+with a minimum module size of:
+
+```text
+30 genes
+```
+
+The resulting module eigengenes (MEs) are used as inputs to module-level causal discovery.
+
+---
+
+# Causal Discovery
+
+Causal discovery is performed hierarchically.
+
+## Module-Level Causal Discovery
+
+MEs are first analysed to identify relationships between WGCNA modules, age, sex, and disease status.
+
+The resulting causal structure is used to identify modules with potential direct relationships with disease.
+
+## Gene-Level Causal Discovery
+
+Genes associated with the selected modules are mapped back to their gene-level representations.
+
+Feature reduction is performed before causal discovery using the predefined filtering and ranking procedures.
+
+The resulting gene-level causal structure is used to identify candidate disease-associated genes.
+
+## DMR-Level Causal Discovery
+
+Genes identified at the gene level are mapped back to their associated DMRs.
+
+Causal discovery is then performed at the DMR level to identify candidate methylation regions with direct relationships to disease.
+
+---
+
+# Causal Feature Selection
+
+The hierarchical causal analysis progressively reduces the feature space:
+
+```text
+Module-level discovery
+     │
+     ▼
+Selected modules
+     │
+     ▼
+Gene mapping
+     │
+     ▼
+Gene-level discovery
+     │
+     ▼
+Selected genes
+     │
+     ▼
+DMR mapping
+     │
+     ▼
+Selected DMRs
+```
+
+The initial causal feature set obtained is `c0` which is then enhanced for prediction through the addition of the derived EAA variables, producing `c1`.
+
+---
+
 # Baseline Construction
 
 The baseline-construction stage generates the statistical and SHAP-derived feature sets used for comparison with the final causal feature set.
@@ -198,12 +300,6 @@ The baseline construction workflow includes:
     4. SHAP computation
     5. SHAP feature ranking
     6. Top feature selection by SHAP ranking
-
-Detailed documentation is provided in:
-
-```text
-code/baseline_construction/
-```
 
 ---
 
@@ -376,102 +472,6 @@ f2_score_ci
 roc_auc_ci
 ```
 
-<!-- Bootstrap distributions can additionally be saved as publication figures where applicable. -->
-
----
-
-# Gene Mapping
-
-DMRs are first mapped to genes using the 450K array manifest CpG probe annotations and subsequently through predefined transcription start site (TSS) region.
-
-The mapping region used in the analysis is:
-
-```text
-TSS -2000 bp to +500 bp
-```
-
-Any remaining DMRs are mapped to genes on the basis of proximity.
-
-The resulting DMR-to-gene relationships are used for subsequent gene-level and module-level analyses.
-
----
-
-# WGCNA
-
-Weighted Gene Co-expression Network Analysis (WGCNA) is used to identify groups of co-expressed genes.
-
-The network construction uses a soft-thresholding power selected using the scale-free topology criterion.
-
-The analysis uses:
-
-```text
-Scale-free topology R² ≥ 0.9
-```
-
-with a minimum module size of:
-
-```text
-30 genes
-```
-
-The resulting module eigengenes (MEs) are used as inputs to module-level causal discovery.
-
----
-
-# Causal Discovery
-
-Causal discovery is performed hierarchically.
-
-## Module-Level Causal Discovery
-
-MEs are first analysed to identify relationships between WGCNA modules, age, sex, and disease status.
-
-The resulting causal structure is used to identify modules with potential direct relationships with disease.
-
-## Gene-Level Causal Discovery
-
-Genes associated with the selected modules are mapped back to their gene-level representations.
-
-Feature reduction is performed before causal discovery using the predefined filtering and ranking procedures.
-
-The resulting gene-level causal structure is used to identify candidate disease-associated genes.
-
-## DMR-Level Causal Discovery
-
-Genes identified at the gene level are mapped back to their associated DMRs.
-
-Causal discovery is then performed at the DMR level to identify candidate methylation regions with direct relationships to disease.
-
----
-
-# Causal Feature Selection
-
-The hierarchical causal analysis progressively reduces the feature space:
-
-```text
-Module-level discovery
-     │
-     ▼
-Selected modules
-     │
-     ▼
-Gene mapping
-     │
-     ▼
-Gene-level discovery
-     │
-     ▼
-Selected genes
-     │
-     ▼
-DMR mapping
-     │
-     ▼
-Selected DMRs
-```
-
-The initial causal feature set obtained is `c0` which is then enhanced for prediction through the addition of the derived EAA variables, producing `c1`.
-
 ---
 
 # Reproducibility
@@ -554,20 +554,6 @@ requirements.txt
 
 ---
 
-<!-- # Reproducibility and Random Seeds
-
-Where applicable, deterministic random seeds are specified in the analysis code.
-
-The primary seed used throughout the machine-learning and bootstrap procedures is:
-
-```text
-42
-```
-
-This includes model initialisation, cross-validation shuffling, and bootstrap sampling where applicable.
-
---- -->
-
 # Data Availability
 
 The repository contains the data products required for reproducing the documented downstream analyses where redistribution is permitted.
@@ -581,6 +567,6 @@ GSE147221
 GSE152027
 ```
 
-Users requiring the original source datasets should obtain them from the corresponding public repositories when redistribution is restricted.
+Users requiring the original source datasets should obtain them from the corresponding public repositories.
 
 ---
