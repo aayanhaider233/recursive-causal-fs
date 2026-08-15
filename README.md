@@ -519,7 +519,7 @@ results/
     └── falsification_results.txt
 ```
 
-Publication figures are stored separately under:
+Publication figures are stored under:
 
 ```text
 figures/
