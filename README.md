@@ -1,7 +1,5 @@
 # Hierarchical Recursive Causal Feature Selection for Explainable Schizophrenia Prediction from DNA Methylation
 
-This repository contains the code and derived data used for the study **"Hierarchical Recursive Causal Feature Selection for Explainable Schizophrenia Prediction from DNA Methylation"**.
-
 The project implements a hierarchical analytical framework integrating DNA methylation analysis, differentially methylated regions (DMRs) identification, statistical feature selection, machine learning (ML), SHAP-based feature selection, and hierarchical causal discovery for schizophrenia classification.
 
 ---
@@ -76,7 +74,7 @@ Contains an interactive visualiser that displays the directed acyclic graphs (DA
 
 ---
 
-# Pipeline Overview
+## Pipeline Overview
 
 The overall workflow follows a hierarchical progression from DNA methylation measurements to DMRs, genes, functional modules, and causal relationships.
 
@@ -137,7 +135,7 @@ The major analytical stages are:
 
 ---
 
-# Data
+## Data
 
 The analysis uses DNA methylation data together with sample metadata and epigenetic age acceleration (EAA) measurements.
 
@@ -147,7 +145,7 @@ The methylation measurements are based on the Illumina HumanMethylation450 BeadC
 
 ---
 
-# Preprocessing
+## Preprocessing
 
 The preprocessing stage performs quality control and preparation of the CpG-level DNA methylation data for downstream analyses and computation.
 
@@ -164,7 +162,7 @@ Batch effects are corrected using NeuroComBat.
 
 ---
 
-# DMR Analysis
+## DMR Analysis
 
 DMRs are identified from the processed methylation data.
 
@@ -180,7 +178,7 @@ The resulting DMR matrix forms the basis for subsequent feature-selection and cl
 
 ---
 
-# DMR-to-Gene Mapping
+## DMR-to-Gene Mapping
 
 DMRs are first mapped to genes using the 450K array manifest CpG probe annotations and subsequently through predefined transcription start site (TSS) region.
 
@@ -196,7 +194,7 @@ The resulting DMR-to-gene relationships are used for subsequent gene-level and m
 
 ---
 
-# Gene Ontology
+## Gene Ontology
 
 Gene Ontology (GO) enrichment analysis is used to map the genes obtained to biological process terms. This set of terms is filtered using specific keywords with respect to their relevance to this study.
 
@@ -204,7 +202,7 @@ This acts as a intermediate refinement stage between the ME- and gene-level caus
 
 ---
 
-# WGCNA
+## WGCNA
 
 Weighted Gene Co-expression Network Analysis (WGCNA) is used to identify groups of co-expressed genes.
 
@@ -226,7 +224,7 @@ The resulting module eigengenes (MEs) are used as inputs to module-level causal 
 
 ---
 
-# Causal Discovery
+## Causal Discovery
 
 Causal discovery is performed hierarchically.
 
@@ -236,7 +234,7 @@ MEs are first analysed to identify relationships between WGCNA modules, age, sex
 
 The resulting causal structure is used to identify modules with potential direct relationships with disease.
 
-## Gene-Level Causal Discovery
+### Gene-Level Causal Discovery
 
 Genes associated with the selected modules are mapped back to their gene-level representations.
 
@@ -244,7 +242,7 @@ Feature reduction is performed before causal discovery using the predefined filt
 
 The resulting gene-level causal structure is used to identify candidate disease-associated genes.
 
-## DMR-Level Causal Discovery
+### DMR-Level Causal Discovery
 
 Genes identified at the gene level are mapped back to their associated DMRs.
 
@@ -252,7 +250,7 @@ Causal discovery is then performed at the DMR level to identify candidate methyl
 
 ---
 
-# Causal Feature Selection
+## Causal Feature Selection
 
 The hierarchical causal analysis progressively reduces the feature space:
 
@@ -282,7 +280,7 @@ The initial causal feature set obtained is `c0` which is then enhanced for predi
 
 ---
 
-# Baseline Construction
+## Baseline Construction
 
 The baseline-construction stage generates the statistical and SHAP-derived feature sets used for comparison with the final causal feature set.
 
@@ -303,7 +301,7 @@ The baseline construction workflow includes:
 
 ---
 
-# SHAP-Based Feature Selection
+## SHAP-Based Feature Selection
 
 SHAP values are computed independently for the logistic regression and random forest models.
 
@@ -317,7 +315,7 @@ The SHAP-derived datasets are subsequently used for classification-performance c
 
 ---
 
-# Classification
+## Classification
 
 The classification stage evaluates the different feature sets using two ML models:
 
@@ -368,7 +366,7 @@ class_weight = "balanced"
 
 ---
 
-# Classification Feature Sets
+## Classification Feature Sets
 
 The classification analysis evaluates several feature configurations.
 
@@ -397,7 +395,7 @@ For reporting purposes, both are referred to as `s1`.
 
 ---
 
-# Classification Evaluation
+## Classification Evaluation
 
 Classification performance is evaluated on the corresponding held-out test dataset for each trained model.
 
@@ -426,7 +424,7 @@ results/classification_performance/performance_metrics/
 
 ---
 
-# Bootstrap Metric Comparison
+## Bootstrap Metric Comparison
 
 Pairwise classification-performance comparisons are performed using bootstrap resampling.
 
@@ -474,7 +472,7 @@ roc_auc_ci
 
 ---
 
-# Reproducibility
+## Reproducibility
 
 The project uses a pinned Python dependency specification.
 
@@ -496,7 +494,7 @@ The recommended execution order follows the order documented in `code/README.md`
 
 ---
 
-# Project Outputs
+## Project Outputs
 
 The main computational outputs are organized under:
 
@@ -527,7 +525,7 @@ figures/
 
 ---
 
-# Software and Dependencies
+## Software and Dependencies
 
 The project is implemented in Python.
 
@@ -554,7 +552,7 @@ requirements.txt
 
 ---
 
-# Data Availability
+## Data Availability
 
 The repository contains the data products required for reproducing the documented downstream analyses where redistribution is permitted.
 
@@ -568,5 +566,3 @@ GSE152027
 ```
 
 Users requiring the original source datasets should obtain them from the corresponding public repositories.
-
----
