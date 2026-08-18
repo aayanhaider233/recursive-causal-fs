@@ -228,7 +228,7 @@ The resulting module eigengenes (MEs) are used as inputs to module-level causal 
 
 Causal discovery is performed hierarchically.
 
-## Module-Level Causal Discovery
+### Module-Level Causal Discovery
 
 MEs are first analysed to identify relationships between WGCNA modules, age, sex, and disease status.
 
