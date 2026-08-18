@@ -445,7 +445,7 @@ The comparisons are performed using paired bootstrap samples of the same test ob
 For each dataset comparison pair, (D1, D2), and metric, M, the bootstrap distribution of:
 
 ```text
-M(dataset 2) - M(dataset 1)
+M(D2) - M(D1)
 ```
 
 is calculated.
